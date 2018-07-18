@@ -4,7 +4,7 @@
 
 ----
 
-# Ambil Token Bisa Di [ADITMADZS PUBLIC BOT](http://line.me/ti/p/~aditmadzsbot1)
+# Ambil Token Bisa Di [ADITMADZS BOT](http://line.me/ti/p/~aditmadzsbot1)
 # SC Sementara Sewaktu Waktu Akan Di Update
 
 # Termux
