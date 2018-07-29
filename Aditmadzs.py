@@ -137,7 +137,7 @@ def menuHelp():
 		"┃🔰┃ " + key + "Runtime" + "\n" + \
 		"┃🔰┃ " + key + "Speed" + "\n" + \
 		"┃🔰┃ " + key + "Status" + "\n" + \
-		"┃🔧┃━━🔧〔 Settings Command 〕🔧━━" + "\n" + \
+		"┃🔧┃━🔧〔 Settings Command 〕🔧━" + "\n" + \
                 "┃🔧┃SetKey 「On/Off」" + "\n" + \
                 "┃🔧┃ " + key + "AutoAdd 「On/Off」" + "\n" + \
                 "┃🔧┃ " + key + "AutoJoin 「On/Off」" + "\n" + \
