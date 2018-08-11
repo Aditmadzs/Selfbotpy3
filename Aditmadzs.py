@@ -123,7 +123,7 @@ def menuHelp():
 	else:
 		key = ''
 	menuHelp =   "╭━━━━━━━━━━━━━━━━━━━━━" + "\n" + \
-                "┃🇮🇩┃🇮🇩🇮🇩〔 Aditmadzs 〕🇮🇩🇮🇩" + "\n" + \
+                "┃🇮🇩┃🇮🇩🇮🇩〔 Jhail 〕🇮🇩🇮🇩" + "\n" + \
                 "┃🇮🇩┃" + "\n" + \
                 "┃🍁┃━━🍁〔 Help Message 〕🍁━━" + "\n" + \
                 "┃🍁┃━━━🍁〔 Menu 〕🍁━━━" + "\n" + \
@@ -207,7 +207,7 @@ def menuHelp():
                 "┃📀┃ " + key + "SearchMusic 「Search」" + "\n" + \
                 "┃📀┃ " + key + "SearchLyric 「Search」" + "\n" + \
                 "┃📀┃ " + key + "SearchYoutube 「Search」" + "\n" + \
-		"╰━━━〔 BIG BOS: ©Aditmadzs™  〕"
+		"╰━━━〔 BIG BOS: ©JhaiL™  〕"
 	return menuHelp
 
 def menuTextToSpeech():
