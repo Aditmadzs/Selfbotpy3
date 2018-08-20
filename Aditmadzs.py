@@ -207,7 +207,9 @@ def menuHelp():
                 "┃📀┃ " + key + "SearchMusic 「Search」" + "\n" + \
                 "┃📀┃ " + key + "SearchLyric 「Search」" + "\n" + \
                 "┃📀┃ " + key + "SearchYoutube 「Search」" + "\n" + \
-		"╰━━━〔 BIG BOS: ©Aditmadzs™  〕"
+		"┃🍁┃»Copyright @Zero-Cool404 «" + "\n" + \
+	        "┃🍁┃»Copyright @MuhMursalind «" + "\n" + \
+	        "╰━━━〔 BIG BOS: ©Aditmadzs™  〕"
 	return menuHelp
 
 def menuTextToSpeech():
