@@ -5,6 +5,7 @@ import json, requests, urllib
 class Server(Config):
     _session        = requests.session()
     timelineHeaders = {}
+    JungelpangHeaders = {}
     Headers         = {}
 
     def __init__(self):
@@ -35,6 +36,12 @@ class Server(Config):
 
     def setTimelineHeaders(self, argument, value):
         self.timelineHeaders[argument] = value
+
+    def setJungelpangHeadersWithDict(self, headersDict):
+        self.JungelpangHeaders.update(headersDict)
+
+    def setJungelpangHeaders(self, argument, value):
+        self.JungelpangHeaders[argument] = value
 
     def additionalHeaders(self, source, newSource):
         headerList={}

@@ -138,16 +138,7 @@ class Talk(object):
             arr.append(arrData)
             textx += mention + str(text)
         return self.sendMessage(to, textx, {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}, 0)
-
-    @loggedIn
-    def sendFooter(self, to, text, agentIcon, agentName, agentLink):
-        contentMetadata = {
-            'AGENT_ICON': agentIcon,
-            'AGENT_NAME': agentName,
-            'AGENT_LINK': agentLink
-        }
-        return self.sendMessage(to, text, contentMetadata, 0)
-
+    
     @loggedIn
     def sendSticker(self, to, stickerVersion, packageId, stickerId):
         contentMetadata = {
