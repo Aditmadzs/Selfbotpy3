@@ -1,25 +1,31 @@
 # -*- coding: utf-8 -*-
 
-from LineAPI.linepy import *
+from line.linepy import *
 from gtts import gTTS
 from bs4 import BeautifulSoup
 from datetime import datetime
 from googletrans import Translator
 import ast, codecs, json, os, pytz, re, random, requests, sys, time, urllib.parse
 
-listApp = ["CHROMEOS", "DESKTOPWIN", "DESKTOPMAC", "IOSIPAD", "WIN10"]
+listApp = [
+	"CHROMEOS\t2.1.5\tHelloWorld\t11.2.5", 
+	"DESKTOPWIN\t5.9.2\tHelloWorld\t11.2.5", 
+	"DESKTOPMAC\t5.9.2\tHelloWorld\t11.2.5", 
+	"IOSIPAD\t8.12.2\tHelloWorld\t11.2.5", 
+	"WIN10\t5.5.5\tHelloWorld\t11.2.5"
+]
 try:
 	for app in listApp:
 		try:
 			try:
 				with open("authToken.txt", "r") as token:
-					authToken = token.read()
+					authToken = token.read().replace("\n","")
 					if not authToken:
 						client = LINE()
 						with open("authToken.txt","w") as token:
 							token.write(client.authToken)
 						continue
-					client = LINE(authToken, speedThrift=False, appName="{}\t2.1.5\tAditmadzs\t11.2.5".format(app))
+					client = LINE(authToken, speedThrift=False, appName=app)
 				break
 			except Exception as error:
 				print(error)
@@ -122,22 +128,24 @@ def menuHelp():
 		key = settings['keyCommand']
 	else:
 		key = ''
-	menuHelp =   "╭━━━━━━━━━━━━━━━━━━━━━" + "\n" + \
+	menuHelp =	"╭━━━━━━━━━━━━━━━━━━━━━" + "\n" + \
                 "┃🇮🇩┃🇮🇩🇮🇩〔 Aditmadzs 〕🇮🇩🇮🇩" + "\n" + \
                 "┃🇮🇩┃" + "\n" + \
                 "┃🍁┃━━🍁〔 Help Message 〕🍁━━" + "\n" + \
-                "┃🍁┃━━━🍁〔 Menu 〕🍁━━━" + "\n" + \
-		"┃🍁┃ " + key + "Help\n" + \
-		"┃🍁┃ " + key + "Translate\n" + \
-		"┃🍁┃ " + key + "TextToSpeech\n" + \
-		"┃🔰┃━━🔰〔 Status Command 〕🔰━━" + "\n" + \
-		"┃🔰┃MyKey" + "\n" + \
-		"┃🔰┃ " + key + "Logout" + "\n" + \
-		"┃🔰┃ " + key + "Restart" + "\n" + \
-		"┃🔰┃ " + key + "Runtime" + "\n" + \
-		"┃🔰┃ " + key + "Speed" + "\n" + \
-		"┃🔰┃ " + key + "Status" + "\n" + \
-		"┃🔧┃━🔧〔 Settings Command 〕🔧━" + "\n" + \
+                "┃🍁┃━━━━━🍁〔 Menu 〕🍁━━━━━━" + "\n" + \
+				"┃🍁┃ " + key + "Help\n" + \
+				"┃🍁┃ " + key + "Translate\n" + \
+				"┃🍁┃ " + key + "TextToSpeech\n" + \
+				"┃🔰┃━━━🔰〔 Status Command 〕🔰━━━" + "\n" + \
+				"┃🔰┃MyKey" + "\n" + \
+				"┃🔰┃ " + key + "Logout" + "\n" + \
+				"┃🔰┃ " + key + "Restart" + "\n" + \
+				"┃🔰┃ " + key + "Runtime" + "\n" + \
+				"┃🔰┃ " + key + "Speed" + "\n" + \
+				"┃🔰┃ " + key + "Status" + "\n" + \
+				"┃🔏┃━━━🔧〔 Sticker Command 〕🔧━━━" + "\n" + \
+                "┃🔏┃ " + key + "Lari" + "\n" + \
+				"┃🔧┃━━━🔧〔 Settings Command 〕🔧━━━" + "\n" + \
                 "┃🔧┃SetKey 「On/Off」" + "\n" + \
                 "┃🔧┃ " + key + "AutoAdd 「On/Off」" + "\n" + \
                 "┃🔧┃ " + key + "AutoJoin 「On/Off」" + "\n" + \
@@ -152,7 +160,7 @@ def menuHelp():
                 "┃🔧┃ " + key + "SetAutoAddMessage: 「text」" + "\n" + \
                 "┃🔧┃ " + key + "SetAutoResponMessage: 「text」" + "\n" + \
                 "┃🔧┃ " + key + "SetAutoJoinMessage: 「Text」" + "\n" + \
-		"┃🇮🇩┃━━🇮🇩〔 Self Command 〕🇮🇩━━" + "\n" + \
+				"┃🇮🇩┃━━━🇮🇩〔 Self Command 〕🇮🇩━━━" + "\n" + \
                 "┃🇮🇩┃ " + key + "ChangeName: 「Text」" + "\n" + \
                 "┃🇮🇩┃ " + key + "ChangeBio: 「Text」" + "\n" + \
                 "┃🇮🇩┃ " + key + "Me" + "\n" + \
@@ -177,7 +185,7 @@ def menuHelp():
                 "┃🇮🇩┃ " + key + "BlockList" + "\n" + \
                 "┃🇮🇩┃ " + key + "FriendBroadcast" + "\n" + \
                 "┃🇮🇩┃ " + key + "ChangePictureProfile" + "\n" + \
-		"┃🛠┃━━🛠〔 Group Command 〕🛠━━" + "\n" + \
+				"┃🛠┃━━━🛠〔 Group Command 〕🛠━━━" + "\n" + \
                 "┃🛠┃ " + key + "ChangeGroupName: 「Text」" + "\n" + \
                 "┃🛠┃ " + key + "GroupCreator" + "\n" + \
                 "┃🛠┃ " + key + "GroupID" + "\n" + \
@@ -191,7 +199,7 @@ def menuHelp():
                 "┃🛠┃ " + key + "GroupInfo" + "\n" + \
                 "┣🛠┫ " + key + "GroupBroadcast: 「Text」" + "\n" + \
                 "┃🛠┃ " + key + "ChangeGroupPicture" + "\n" + \
-		"┃✍️┃━━✍️〔 Special Command 〕✍️━━" + "\n" + \
+				"┃✍️┃━━━✍️〔 Special Command 〕✍️━━━" + "\n" + \
                 "┃✍️┃ " + key + "Mimic 「On/Off」" + "\n" + \
                 "┃✍️┃ " + key + "MimicList" + "\n" + \
                 "┃✍️┃ " + key + "MimicAdd @Mention" + "\n" + \
@@ -199,7 +207,7 @@ def menuHelp():
                 "┃✍️┃ " + key + "Mention" + "\n" + \
                 "┃✍️┃ " + key + "Lurking 「On/Off」" + "\n" + \
                 "┃✍️┃ " + key + "Lurking" + "\n" + \
-		"┃📀┃━━📀〔 Media Command 〕📀━━" + "\n" + \
+				"┃📀┃━━━📀〔 Media Command 〕📀━━━" + "\n" + \
                 "┃📀┃ " + key + "InstaInfo 「Username」" + "\n" + \
                 "┃📀┃ " + key + "InstaStory 「Username」" + "\n" + \
                 "┃📀┃ " + key + "Quotes" + "\n" + \
@@ -207,9 +215,9 @@ def menuHelp():
                 "┃📀┃ " + key + "SearchMusic 「Search」" + "\n" + \
                 "┃📀┃ " + key + "SearchLyric 「Search」" + "\n" + \
                 "┃📀┃ " + key + "SearchYoutube 「Search」" + "\n" + \
-		"┃🍁┃»Copyright @Zero-Cool404 «" + "\n" + \
-	        "┃🍁┃»Copyright @MuhMursalind «" + "\n" + \
-	        "╰━━━〔 BIG BOS: ©Aditmadzs™  〕"
+				"┃📀┃〔 muhmursalind 〕" + "\n" + \
+				"┃📀┃〔 Zero-Cool404 〕" + "\n" + \
+				"╰━━━〔 BIG BOS: ©Aditmadzs™  〕"
 	return menuHelp
 
 def menuTextToSpeech():
@@ -218,61 +226,61 @@ def menuTextToSpeech():
 	else:
 		key = ''
 	menuTextToSpeech =	"╔══[ Text To Speech ]" + "\n" + \
-				"╠ " + key + "af : Afrikaans" + "\n" + \
-				"╠ " + key + "sq : Albanian" + "\n" + \
-				"╠ " + key + "ar : Arabic" + "\n" + \
-				"╠ " + key + "hy : Armenian" + "\n" + \
-				"╠ " + key + "bn : Bengali" + "\n" + \
-				"╠ " + key + "ca : Catalan" + "\n" + \
-				"╠ " + key + "zh : Chinese" + "\n" + \
-				"╠ " + key + "zh-cn : Chinese (Mandarin/China)" + "\n" + \
-				"╠ " + key + "zh-tw : Chinese (Mandarin/Taiwan)" + "\n" + \
-				"╠ " + key + "zh-yue : Chinese (Cantonese)" + "\n" + \
-				"╠ " + key + "hr : Croatian" + "\n" + \
-				"╠ " + key + "cs : Czech" + "\n" + \
-				"╠ " + key + "da : Danish" + "\n" + \
-				"╠ " + key + "nl : Dutch" + "\n" + \
-				"╠ " + key + "en : English" + "\n" + \
-				"╠ " + key + "en-au : English (Australia)" + "\n" + \
-				"╠ " + key + "en-uk : English (United Kingdom)" + "\n" + \
-				"╠ " + key + "en-us : English (United States)" + "\n" + \
-				"╠ " + key + "eo : Esperanto" + "\n" + \
-				"╠ " + key + "fi : Finnish" + "\n" + \
-				"╠ " + key + "fr : French" + "\n" + \
-				"╠ " + key + "de : German" + "\n" + \
-				"╠ " + key + "el : Greek" + "\n" + \
-				"╠ " + key + "hi : Hindi" + "\n" + \
-				"╠ " + key + "hu : Hungarian" + "\n" + \
-				"╠ " + key + "is : Icelandic" + "\n" + \
-				"╠ " + key + "id : Indonesian" + "\n" + \
-				"╠ " + key + "it : Italian" + "\n" + \
-				"╠ " + key + "ja : Japanese" + "\n" + \
-				"╠ " + key + "km : Khmer (Cambodian)" + "\n" + \
-				"╠ " + key + "ko : Korean" + "\n" + \
-				"╠ " + key + "la : Latin" + "\n" + \
-				"╠ " + key + "lv : Latvian" + "\n" + \
-				"╠ " + key + "mk : Macedonian" + "\n" + \
-				"╠ " + key + "no : Norwegian" + "\n" + \
-				"╠ " + key + "pl : Polish" + "\n" + \
-				"╠ " + key + "pt : Portuguese" + "\n" + \
-				"╠ " + key + "ro : Romanian" + "\n" + \
-				"╠ " + key + "ru : Russian" + "\n" + \
-				"╠ " + key + "sr : Serbian" + "\n" + \
-				"╠ " + key + "si : Sinhala" + "\n" + \
-				"╠ " + key + "sk : Slovak" + "\n" + \
-				"╠ " + key + "es : Spanish" + "\n" + \
-				"╠ " + key + "es-es : Spanish (Spain)" + "\n" + \
-				"╠ " + key + "es-us : Spanish (United States)" + "\n" + \
-				"╠ " + key + "sw : Swahili" + "\n" + \
-				"╠ " + key + "sv : Swedish" + "\n" + \
-				"╠ " + key + "ta : Tamil" + "\n" + \
-				"╠ " + key + "th : Thai" + "\n" + \
-				"╠ " + key + "tr : Turkish" + "\n" + \
-				"╠ " + key + "uk : Ukrainian" + "\n" + \
-				"╠ " + key + "vi : Vietnamese" + "\n" + \
-				"╠ " + key + "cy : Welsh" + "\n" + \
-				"╚══[ Jangan Typo ]" + "\n" + "\n\n" + \
-				"Contoh : " + key + "say-id Aditmadzs"
+						"╠ " + key + "af : Afrikaans" + "\n" + \
+						"╠ " + key + "sq : Albanian" + "\n" + \
+						"╠ " + key + "ar : Arabic" + "\n" + \
+						"╠ " + key + "hy : Armenian" + "\n" + \
+						"╠ " + key + "bn : Bengali" + "\n" + \
+						"╠ " + key + "ca : Catalan" + "\n" + \
+						"╠ " + key + "zh : Chinese" + "\n" + \
+						"╠ " + key + "zh-cn : Chinese (Mandarin/China)" + "\n" + \
+						"╠ " + key + "zh-tw : Chinese (Mandarin/Taiwan)" + "\n" + \
+						"╠ " + key + "zh-yue : Chinese (Cantonese)" + "\n" + \
+						"╠ " + key + "hr : Croatian" + "\n" + \
+						"╠ " + key + "cs : Czech" + "\n" + \
+						"╠ " + key + "da : Danish" + "\n" + \
+						"╠ " + key + "nl : Dutch" + "\n" + \
+						"╠ " + key + "en : English" + "\n" + \
+						"╠ " + key + "en-au : English (Australia)" + "\n" + \
+						"╠ " + key + "en-uk : English (United Kingdom)" + "\n" + \
+						"╠ " + key + "en-us : English (United States)" + "\n" + \
+						"╠ " + key + "eo : Esperanto" + "\n" + \
+						"╠ " + key + "fi : Finnish" + "\n" + \
+						"╠ " + key + "fr : French" + "\n" + \
+						"╠ " + key + "de : German" + "\n" + \
+						"╠ " + key + "el : Greek" + "\n" + \
+						"╠ " + key + "hi : Hindi" + "\n" + \
+						"╠ " + key + "hu : Hungarian" + "\n" + \
+						"╠ " + key + "is : Icelandic" + "\n" + \
+						"╠ " + key + "id : Indonesian" + "\n" + \
+						"╠ " + key + "it : Italian" + "\n" + \
+						"╠ " + key + "ja : Japanese" + "\n" + \
+						"╠ " + key + "km : Khmer (Cambodian)" + "\n" + \
+						"╠ " + key + "ko : Korean" + "\n" + \
+						"╠ " + key + "la : Latin" + "\n" + \
+						"╠ " + key + "lv : Latvian" + "\n" + \
+						"╠ " + key + "mk : Macedonian" + "\n" + \
+						"╠ " + key + "no : Norwegian" + "\n" + \
+						"╠ " + key + "pl : Polish" + "\n" + \
+						"╠ " + key + "pt : Portuguese" + "\n" + \
+						"╠ " + key + "ro : Romanian" + "\n" + \
+						"╠ " + key + "ru : Russian" + "\n" + \
+						"╠ " + key + "sr : Serbian" + "\n" + \
+						"╠ " + key + "si : Sinhala" + "\n" + \
+						"╠ " + key + "sk : Slovak" + "\n" + \
+						"╠ " + key + "es : Spanish" + "\n" + \
+						"╠ " + key + "es-es : Spanish (Spain)" + "\n" + \
+						"╠ " + key + "es-us : Spanish (United States)" + "\n" + \
+						"╠ " + key + "sw : Swahili" + "\n" + \
+						"╠ " + key + "sv : Swedish" + "\n" + \
+						"╠ " + key + "ta : Tamil" + "\n" + \
+						"╠ " + key + "th : Thai" + "\n" + \
+						"╠ " + key + "tr : Turkish" + "\n" + \
+						"╠ " + key + "uk : Ukrainian" + "\n" + \
+						"╠ " + key + "vi : Vietnamese" + "\n" + \
+						"╠ " + key + "cy : Welsh" + "\n" + \
+						"╚══[ Jangan Typo ]" + "\n" + "\n\n" + \
+						"Contoh : " + key + "say-id chiken"
 	return menuTextToSpeech
 
 def menuTranslate():
@@ -388,7 +396,7 @@ def menuTranslate():
                        "┃🇮🇩┃ fil : Filipino" + "\n" + \
                        "┃🇮🇩┃ he : Hebrew" + "\n" + \
                        "╰━━〔 Jangan Typo 〕" + "\n" + "\n\n" + \
-		       "Contoh : " + key + "tr-id Aditmadzs"
+					"Contoh : " + key + "tr-id Aditmadzs"
 	return menuTranslate
 
 def clientBot(op):
@@ -459,25 +467,13 @@ def clientBot(op):
 								client.sendMessage(to, "Berhasil mengubah set key command menjadi : 「{}」".format(str(key).lower()))
 						elif cmd == "help":
 							helpMessage = menuHelp()
-							contact = client.getContact(sender)
-							icon = "http://dl.profile.line-cdn.net/{}".format(contact.pictureStatus)
-							name = contact.displayName
-							link = "https://pa1.narvii.com/6547/d29a5e4bb3405d83fc15cf50ec057f41640618a8_hq.gif"
-							client.sendFooter(to, helpMessage, icon, name, link)
+							client.sendMessage(to, helpMessage)
 						elif cmd == "texttospeech":
 							helpTextToSpeech = menuTextToSpeech()
-							contact = client.getContact(sender)
-							icon = "http://dl.profile.line-cdn.net/{}".format(contact.pictureStatus)
-							name = contact.displayName
-							link = "https://pa1.narvii.com/6547/d29a5e4bb3405d83fc15cf50ec057f41640618a8_hq.gif"
-							client.sendFooter(to, helpTextToSpeech, icon, name, link)
+							client.sendMessage(to, helpTextToSpeech)
 						elif cmd == "translate":
 							helpTranslate = menuTranslate()
-							contact = client.getContact(sender)
-							icon = "http://dl.profile.line-cdn.net/{}".format(contact.pictureStatus)
-							name = contact.displayName
-							link = "https://pa1.narvii.com/6547/d29a5e4bb3405d83fc15cf50ec057f41640618a8_hq.gif"
-							client.sendFooter(to, helpTranslate, icon, name, link)
+							client.sendMessage(to, helpTranslate)
 
 
 						elif cmd == "status":
@@ -1125,14 +1121,30 @@ def clientBot(op):
 										client.sendMessage(to, "Gagal menghapus target")
 
 
+						elif cmd.startswith("lari"):
+							url = "https://i.pinimg.com/originals/fc/b7/a5/fcb7a59766ad30a4160cdebbba53e16b.gif"
+							data = {
+								"type": "template",
+								"altText": "this is a image carousel template",
+								"template": {
+									"type": "image_carousel",
+									"columns": [
+										{
+											"imageUrl": url,
+											"action": {
+												"type": "uri",
+												"uri": url
+											}
+										}
+									]
+								}
+							}
+							client.postJungelpang(to, data)
 						elif cmd.startswith("instainfo"):
 							sep = text.split(" ")
 							txt = text.replace(sep[0] + " ","")
 							url = requests.get("http://rahandiapi.herokuapp.com/instainfo/{}?key=betakey".format(txt))
 							data = url.json()
-							icon = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/599px-Instagram_icon.png"
-							name = "Instagram"
-							link = "https://www.instagram.com/{}".format(data["result"]["username"])
 							result = "╔══[ Instagram Info ]"
 							result += "\n╠ Name : {}".format(data["result"]["name"])
 							result += "\n╠ Username: {}".format(data["result"]["username"])
@@ -1143,7 +1155,7 @@ def clientBot(op):
 							result += "\n╠ Post : {}".format(data["result"]["mediacount"])
 							result += "\n╚══[ Finish ]"
 							client.sendImageWithURL(to, data["result"]["url"])
-							client.sendFooter(to, result, icon, name, link)
+							client.sendMessage(to, result)
 						elif cmd.startswith("instastory "):
 							sep = text.split(" ")
 							query = text.replace(sep[0] + " ","")
