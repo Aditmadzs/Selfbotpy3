@@ -1133,7 +1133,7 @@ def clientBot(op):
 											"imageUrl": url,
 											"action": {
 												"type": "uri",
-												"uri": url
+												"uri": "http://line.me/ti/p/~adit_cmct"
 											}
 										}
 									]
