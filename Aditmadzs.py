@@ -8,11 +8,11 @@ from googletrans import Translator
 import ast, codecs, json, os, pytz, re, random, requests, sys, time, urllib.parse
 
 listApp = [
-	"CHROMEOS\t2.1.5\tHelloWorld\t11.2.5", 
-	"DESKTOPWIN\t5.9.2\tHelloWorld\t11.2.5", 
-	"DESKTOPMAC\t5.9.2\tHelloWorld\t11.2.5", 
-	"IOSIPAD\t8.12.2\tHelloWorld\t11.2.5", 
-	"WIN10\t5.5.5\tHelloWorld\t11.2.5"
+	"CHROMEOS\t2.1.5\tAditmadzs\t11.2.5", 
+	"DESKTOPWIN\t5.9.2\tAditmadzs\t11.2.5", 
+	"DESKTOPMAC\t5.9.2\tAditmadzs\t11.2.5", 
+	"IOSIPAD\t8.12.2\tAditmadzs\t11.2.5", 
+	"WIN10\t5.5.5\tAditmadzs\t11.2.5"
 ]
 try:
 	for app in listApp:
