@@ -1,3 +1,4 @@
+## For install Tutorial [HERE](https://www.youtube.com/watch?v=Gu-FHvKM5bE&t=27s)
 # ![logo](LINE-sm.png) LINE Python
 
 *LINE Messaging's private API*
