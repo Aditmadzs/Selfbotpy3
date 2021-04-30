@@ -10,6 +10,6 @@ idna==2.7
 pyasn1==0.4.3
 pytz==2018.5
 requests==2.19.1
-rsa==3.4.2
+rsa==4.7
 six==1.11.0
 urllib3==1.23
